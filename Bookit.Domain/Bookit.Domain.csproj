@@ -47,7 +47,9 @@
     <Compile Include="Commands\CreateInvoicesCommand.cs" />
     <Compile Include="Entities\Booking.cs" />
     <Compile Include="Entities\DateRange.cs" />
+    <Compile Include="Entities\GetResourcesAvailableQuery.cs" />
     <Compile Include="Entities\House.cs" />
+    <Compile Include="Views\ResourceView.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

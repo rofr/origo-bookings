@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Bookit.Domain;
 using OrigoDB.Core;
 
@@ -28,6 +30,18 @@ namespace Bookit.Demo
             numInvoicesGenerated = _engine.Execute(invoiceCommand);
             Console.WriteLine("Generated {0} invoices, should be 0", numInvoicesGenerated);
             
+            //execute a lambda query, will only work in-process (lambdas won't serialize)
+            foreach(string userName  in _engine.Execute(m => m.Users.Values.Select(u => u.Name).ToArray()))
+                Console.WriteLine(userName);
+
+            //execute an explicit query
+            List<ResourceView> resources = _engine.Execute(new GetResourcesAvailableQuery(new DateRange(DateTime.Today, DateTime.Today.AddDays(1))));
+            foreach (var resourceView in resources)
+            {
+                Console.WriteLine(resourceView.Id);
+                Console.WriteLine(resourceView.Name);
+                Console.WriteLine(resourceView.PricePerDay);
+            }
 
             Console.ReadLine();
         }
